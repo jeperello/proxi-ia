@@ -13,7 +13,7 @@ app.use(express.json()); // Permite leer cuerpos JSON en las peticiones
 
 // Configuración de Gemini
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); // Usamos flash por velocidad
+const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" }); // Usamos flash por velocidad
 
 // Ruta del Proxy
 app.post('/api/chat', async (req, res) => {
