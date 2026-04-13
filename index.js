@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { cvContent } = require('./cv-data'); 
 
 const app = express();
 const port = process.env.PORT || 10000; // Render usa el puerto 10000 por defecto
@@ -15,8 +16,10 @@ app.use(express.json()); // Permite leer cuerpos JSON en las peticiones
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ 
     model: "gemini-2.5-flash",
-    systemInstruction: `Eres el asistente virtual del portfolio de un Desarrollador Fullstack.
+    systemInstruction: `Eres el asistente virtual del portfolio de Jorge Perello, un Desarrollador Fullstack.
         Tu misión es explicar los proyectos del autor de forma técnica pero accesible.
+        TU CONOCIMIENTO, el curriculum de Jorge es el siguiente:
+        ${cvContent}
 
         Información clave de los proyectos:
         1. API Reactiva con Spring WebFlux: Desarrollada con Java 21 y Spring Boot 3. Utiliza programación funcional y no bloqueante. La demo en el portfolio usa Server-Sent Events (SSE) para transmitir en tiempo real métricas de memoria del servidor, tecnologías y ventajas. Usa Spring Data R2DBC para persistencia reactiva.
